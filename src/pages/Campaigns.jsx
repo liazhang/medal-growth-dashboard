@@ -161,7 +161,7 @@ export default function Campaigns({ dateRange }) {
         <div className="p-5 border-b border-border flex items-center justify-between">
           <div>
             <h3 className="text-sm font-medium text-text-primary">All Campaigns</h3>
-            <p className="text-xs text-text-muted mt-0.5">{filtered.length} campaigns · ${filtered.reduce((s, c) => s + c.cost, 0).toLocaleString()} total spend</p>
+            <p className="text-xs text-text-muted mt-0.5">{filtered.length} campaigns · ${filtered.reduce((s, c) => s + (c.cost || 0), 0).toLocaleString()} total spend</p>
           </div>
           <select
             value={filterChannel}
@@ -213,8 +213,8 @@ export default function Campaigns({ dateRange }) {
                     </span>
                   </td>
                   <td className="px-4 py-3 text-text-muted text-xs">{c.launch}</td>
-                  <td className="px-4 py-3 font-medium">${c.cost.toLocaleString()}</td>
-                  <td className="px-4 py-3">{c.w0_users.toLocaleString()}</td>
+                  <td className="px-4 py-3 font-medium">{c.cost != null ? `$${c.cost.toLocaleString()}` : '—'}</td>
+                  <td className="px-4 py-3">{c.w0_users != null ? c.w0_users.toLocaleString() : '—'}</td>
                   <td className={`px-4 py-3 font-medium ${CPA_COLOR(c.w0_cpa)}`}>
                     {c.w0_cpa !== null ? `$${c.w0_cpa.toFixed(2)}` : '—'}
                   </td>
